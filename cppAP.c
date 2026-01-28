@@ -3,7 +3,7 @@
  * Date:   2026-01-28
  */
 
-#include "cpp.h"
+#include "cppAP.h"
 
 #include <assert.h>
 #include <limits.h>
@@ -41,16 +41,4 @@ Pair cppAP(Points points) {
     }
 
     return result;
-}
-
-int main(void) {
-    srand(time(NULL));
-    Points points = generate_points(10, RANGE);
-    Pair cpp = cppAP(points);
-
-    printf("Closest Pair of Points: %d %d | %d %d\n", cpp.l.x, cpp.l.y, cpp.r.x,
-           cpp.r.y);
-
-    destroy_points(&points);
-    return 0;
 }

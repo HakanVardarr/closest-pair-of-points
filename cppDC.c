@@ -3,37 +3,14 @@
  * Date:   2026-01-28
  */
 
-#include "cpp.h"
+#include "cppDC.h"
+#include "cppAP.h"
 
 #include <assert.h>
 #include <limits.h>
 #include <math.h>
 #include <stddef.h>
-#include <stdio.h>
 #include <stdlib.h>
-#include <time.h>
-
-#define RANGE 1000
-
-Pair cppAP(Points points) {
-    assert(points.length >= 2 && "Points size must be > 2");
-
-    Pair result = {0};
-
-    float smallest = INFINITY;
-    for (size_t i = 0; i < points.length - 1; ++i) {
-        for (size_t j = i + 1; j < points.length; ++j) {
-            float d = distance(points.data[i], points.data[j]);
-            if (d < smallest) {
-                smallest = d;
-                result.l = points.data[i];
-                result.r = points.data[j];
-            }
-        }
-    }
-
-    return result;
-}
 
 void split_y(Point mid, const Points y, Points *y_l, Points *y_r) {
     y_l->data = (Point *)malloc(y.length * sizeof(Point));
@@ -107,6 +84,10 @@ Pair _cppDC(Points x, int first, int last, Points y) {
         }
     }
 
+    free(strip.data);
+    free(y_l.data);
+    free(y_r.data);
+
     return result;
 }
 
@@ -119,22 +100,10 @@ Pair cppDC(Points points) {
     qsort(p_x.data, p_x.length, sizeof(Point), cmp_point_x);
     qsort(p_y.data, p_y.length, sizeof(Point), cmp_point_y);
 
-    Pair result = _cppDC(p_x, 0, points.length - 1, p_y);
+    Pair result = _cppDC(p_x, 0, points.length, p_y);
 
     destroy_points(&p_x);
     destroy_points(&p_y);
 
     return result;
-}
-
-int main(void) {
-    srand(time(NULL));
-    Points points = generate_points(10, RANGE);
-    Pair cpp = cppDC(points);
-
-    printf("Closest Pair of Points: %d %d | %d %d\n", cpp.l.x, cpp.l.y, cpp.r.x,
-           cpp.r.y);
-
-    destroy_points(&points);
-    return 0;
 }

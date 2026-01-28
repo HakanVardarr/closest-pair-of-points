@@ -1,16 +1,24 @@
 CC = gcc
 CFLAGS = -Wall -Wextra -O2
 
-all: cppAP cppDC
+# Default target
+all: cpp.o cppAP.o cppDC.o benchmark
 
+# Common shared functions
 cpp.o: cpp.c cpp.h
 	$(CC) $(CFLAGS) -c cpp.c -o cpp.o
 
-cppAP: cppAP.c cpp.o
-	$(CC) $(CFLAGS) cppAP.c cpp.o -o cppAP -lm
+# Brute-force algorithm object
+cppAP.o: cppAP.c cpp.h
+	$(CC) $(CFLAGS) -c cppAP.c -o cppAP.o
 
-cppDC: cppDC.c cpp.o
-	$(CC) $(CFLAGS) cppDC.c cpp.o -o cppDC -lm
+# Divide & Conquer algorithm object
+cppDC.o: cppDC.c cpp.h
+	$(CC) $(CFLAGS) -c cppDC.c -o cppDC.o
+
+# Benchmark executable (when you need it)
+benchmark: benchmark.c cpp.o cppAP.o cppDC.o
+	$(CC) $(CFLAGS) benchmark.c cpp.o cppAP.o cppDC.o -o benchmark -lm
 
 clean:
-	rm -f cpp.o cppAP cppDC
+	rm -f *.o benchmark
