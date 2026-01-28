@@ -1,3 +1,6 @@
+#define _POSIX_C_SOURCE 200809L
+
+#include "cpp.h"
 #include "cppAP.h"
 #include "cppDC.h"
 
@@ -7,7 +10,7 @@
 #include <time.h>
 
 #define RANGE 10000000
-#define NPOINTS 100000
+#define NPOINTS 10000
 
 double now_seconds(void) {
     struct timespec ts;

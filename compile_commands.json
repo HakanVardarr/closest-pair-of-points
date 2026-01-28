@@ -1,0 +1,53 @@
+[
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-Wall",
+      "-Wextra",
+      "-O2",
+      "-Iinclude",
+      "-std=c11",
+      "-c",
+      "-o",
+      "build/objects/cpp.o",
+      "src/cpp.c"
+    ],
+    "directory": "/mnt/c/Users/Hakan/Programming/C/closest-pair-of-points",
+    "file": "/mnt/c/Users/Hakan/Programming/C/closest-pair-of-points/src/cpp.c",
+    "output": "/mnt/c/Users/Hakan/Programming/C/closest-pair-of-points/build/objects/cpp.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-Wall",
+      "-Wextra",
+      "-O2",
+      "-Iinclude",
+      "-std=c11",
+      "-c",
+      "-o",
+      "build/objects/cppAP.o",
+      "src/cppAP.c"
+    ],
+    "directory": "/mnt/c/Users/Hakan/Programming/C/closest-pair-of-points",
+    "file": "/mnt/c/Users/Hakan/Programming/C/closest-pair-of-points/src/cppAP.c",
+    "output": "/mnt/c/Users/Hakan/Programming/C/closest-pair-of-points/build/objects/cppAP.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-Wall",
+      "-Wextra",
+      "-O2",
+      "-Iinclude",
+      "-std=c11",
+      "-c",
+      "-o",
+      "build/objects/cppDC.o",
+      "src/cppDC.c"
+    ],
+    "directory": "/mnt/c/Users/Hakan/Programming/C/closest-pair-of-points",
+    "file": "/mnt/c/Users/Hakan/Programming/C/closest-pair-of-points/src/cppDC.c",
+    "output": "/mnt/c/Users/Hakan/Programming/C/closest-pair-of-points/build/objects/cppDC.o"
+  }
+]

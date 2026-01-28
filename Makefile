@@ -1,24 +1,33 @@
 CC = gcc
-CFLAGS = -Wall -Wextra -O2
+CFLAGS = -Wall -Wextra -O2 -Iinclude 
 
-# Default target
-all: cpp.o cppAP.o cppDC.o benchmark
+SRC_DIR = src
+INC_DIR = include
+BUILD_DIR = build
+OBJ_DIR = $(BUILD_DIR)/objects
 
-# Common shared functions
-cpp.o: cpp.c cpp.h
-	$(CC) $(CFLAGS) -c cpp.c -o cpp.o
+OBJS = $(OBJ_DIR)/cpp.o \
+       $(OBJ_DIR)/cppAP.o \
+       $(OBJ_DIR)/cppDC.o
 
-# Brute-force algorithm object
-cppAP.o: cppAP.c cpp.h
-	$(CC) $(CFLAGS) -c cppAP.c -o cppAP.o
+TARGET = $(BUILD_DIR)/benchmark
 
-# Divide & Conquer algorithm object
-cppDC.o: cppDC.c cpp.h
-	$(CC) $(CFLAGS) -c cppDC.c -o cppDC.o
+all: directories $(OBJS) $(TARGET)
 
-# Benchmark executable (when you need it)
-benchmark: benchmark.c cpp.o cppAP.o cppDC.o
-	$(CC) $(CFLAGS) benchmark.c cpp.o cppAP.o cppDC.o -o benchmark -lm
+directories:
+	mkdir -p $(OBJ_DIR)
+
+$(OBJ_DIR)/cpp.o: $(SRC_DIR)/cpp.c $(INC_DIR)/cpp.h
+	$(CC) $(CFLAGS) -c $< -o $@
+
+$(OBJ_DIR)/cppAP.o: $(SRC_DIR)/cppAP.c $(INC_DIR)/cpp.h
+	$(CC) $(CFLAGS) -c $< -o $@
+
+$(OBJ_DIR)/cppDC.o: $(SRC_DIR)/cppDC.c $(INC_DIR)/cpp.h
+	$(CC) $(CFLAGS) -c $< -o $@
+
+$(TARGET): $(SRC_DIR)/benchmark.c $(OBJS)
+	$(CC) $(CFLAGS) $< $(OBJS) -o $@ -lm
 
 clean:
-	rm -f *.o benchmark
+	rm -rf $(BUILD_DIR)
