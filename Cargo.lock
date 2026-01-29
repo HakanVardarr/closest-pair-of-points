@@ -3,7 +3,7 @@
 version = 4
 
 [[package]]
-name = "closest-pair-points"
+name = "closest-pair-of-points"
 version = "0.1.0"
 dependencies = [
  "fastrand",
